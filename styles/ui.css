@@ -957,3 +957,10 @@ section.effect-panel {
 .gm-screen-tabs {
   font-family: "Old Newspaper Font";
 }
+
+/**
+ * Module: Dungeon Draw
+ */
+ #dd-control-tools .dd-control-wrapper {
+    right: 450px;
+ }
