@@ -62,15 +62,6 @@ textarea:focus {
   background: none;
 }
 
-#navigation {
-  display: none;
-  width: 0;
-  height: 0;
-  overflow: hidden;
-  visibility: hidden;
-  opacity: 0;
-}
-
 #ui-left {
   justify-content: initial !important;
 }
@@ -340,6 +331,27 @@ a.inline-roll {
   background: none;
 }
 
+#navigation.hidden {
+    display: none !important;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    opacity: 0;
+  } 
+
+#navigation {
+    opacity: 0.2;
+    position: fixed;
+    left: 12px;
+    top: 70px;
+    transition: opacity 250ms ease-in-out;
+}
+  
+#navigation:hover {
+    opacity: 1;
+}
+
 #players.hidden {
   display: none !important;
   width: 0;
@@ -364,6 +376,10 @@ div#camera-views #players {
   position: relative;
 }
 
+#controls.collapsed {
+    right: 30px;
+}
+
 #controls {
   position: fixed;
   right: 330px;
@@ -375,6 +391,7 @@ div#camera-views #players {
   pointer-events: all !important;
   padding-top: 15px;
   flex-direction: row-reverse;
+  transition: right 50ms linear;
 }
 
 #controls:hover {
@@ -470,10 +487,15 @@ section.effect-panel .icon .badge.unlimited {
   color: var(--color-primary-medium);
 }
 
+section.effect-panel.collapsed {
+    right: 150px !important;
+}
+
 section.effect-panel {
   top: 0 !important;
   right: 450px !important;
   padding-top: 14px;
+  transition: right 50ms linear;
 }
 
 .effect-info > h1 {

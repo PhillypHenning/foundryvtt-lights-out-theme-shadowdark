@@ -11,16 +11,17 @@ import { registerSettings } from "./settings.js";
 let init = false;
 
 Hooks.on("renderApplication", async function () {
-  if (isGm()) {
-    $("#players").removeClass("hidden");
-    $("#hotbar").removeClass("hidden");
-  } else {
-    $("#players").addClass("hidden");
+  // Get visibility settings for UI elements
+  let hotBarSetting = game.settings.get("lights-out-theme-shadowdark", "hotbar_visibility");
+  let playerListSetting = game.settings.get("lights-out-theme-shadowdark", "players_list_visibility");
+  let navBarSetting = game.settings.get("lights-out-theme-shadowdark", "navbar_visibility");
+  let userPermission = isGm() ? 1 : 2; // GMs = 1, Players = 2
 
-    if (!game.settings.get("lights-out-theme-shadowdark", "show_player_hotbar")) {
-      $("#hotbar").addClass("hidden");
-    }
-  }
+  // Hide UI elements if current player permissions are below the global setting
+  (hotBarSetting < userPermission) ? $("#hotbar").addClass("hidden") : $("#hotbar").removeClass("hidden");
+  (playerListSetting < userPermission) ? $("#players").addClass("hidden") : $("#players").removeClass("hidden");
+  (navBarSetting < userPermission) ? $("#navigation").addClass("hidden") : $("#navigation").removeClass("hidden");
+
 
   // NOTE: Shadowdark systems light tracking calls renderApplication
   // repeatedly. To avoid unnecessary rerenders of the UI, we will only
@@ -28,8 +29,34 @@ Hooks.on("renderApplication", async function () {
   if (!init) {
     await renderCharacter();
     await renderParty();
+
     init = true;
   }
+});
+
+Hooks.on("renderSceneControls", (controls, html) => {
+    //create a control tools button and add a click handler to collapse the side bar
+    let icon = (ui.sidebar._collapsed) ? "fa-caret-left" : "fa-caret-right";
+    $("#controls ol.control-tools.main-controls").append(`
+        <li class="scene-control sidebar-control" data-tooltip="${game.i18n.localize("LIGHTSOUTSD.sidebar_tooltip")}">
+            <i class="fas ${icon}"></i>
+        </li>`
+    );
+    $(".scene-control.sidebar-control").click(async function() {ui.sidebar._collapsed ? ui.sidebar.expand() : ui.sidebar.collapse();})
+
+    //move controls and effects panel to match the sidebar's collapsed state
+    if (ui.sidebar._collapsed) {
+        $("#controls").addClass("collapsed");
+        $("section.effect-panel").addClass("collapsed");
+    }
+    else {
+        $("#controls").removeClass("collapsed");
+        $("section.effect-panel").removeClass("collapsed");
+    }
+});
+
+Hooks.on("collapseSidebar", (sidebar, collapsed) => {
+    ui.controls.render();
 });
 
 Hooks.on("updateActor", async function (actor) {
