@@ -958,7 +958,8 @@ section.effect-panel {
 .SD-list .item-image,
 .directory .directory-item img,
 .sheet header.sheet-header img,
-.result-image {
+.result-image,
+.macro-icon {
   filter: var(--filter-grayscale);
 }
 
