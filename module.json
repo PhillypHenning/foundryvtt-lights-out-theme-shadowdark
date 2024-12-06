@@ -2,7 +2,7 @@
     "id": "lights-out-theme-shadowdark",
     "title": "Shadowdark Lights Out Theme",
     "description": "A darker and polished UI theme for Shadowdark with party and character panels.",
-    "version": "1.05",
+    "version": "1.06",
     "authors": [
         {
             "name": "Nash",
@@ -44,14 +44,14 @@
                 "manifest": "https://github.com/Muttley/foundryvtt-shadowdark/releases/latest/download/system.json",
                 "compatibility": {
                     "minimum": "3.0.0",
-                    "verified": "3.1.3"
+                    "verified": "3.2.1"
                 }
             }
         ]
     },
     "bugs": "https://github.com/ronijaakkola/foundryvtt-lights-out-theme-shadowdark/issues",
     "changelog": "https://github.com/ronijaakkola/foundryvtt-lights-out-theme-shadowdark/releases",
-    "download": "https://github.com/ronijaakkola/foundryvtt-lights-out-theme-shadowdark/releases/download/v1.05/module.zip",
+    "download": "https://github.com/ronijaakkola/foundryvtt-lights-out-theme-shadowdark/releases/download/v1.06/module.zip",
     "manifest": "https://github.com/ronijaakkola/foundryvtt-lights-out-theme-shadowdark/releases/latest/download/module.json",
     "readme": "https://github.com/ronijaakkola/foundryvtt-lights-out-theme-shadowdark/blob/main/README.md",
     "url": "https://github.com/ronijaakkola/foundryvtt-lights-out-theme-shadowdark"
