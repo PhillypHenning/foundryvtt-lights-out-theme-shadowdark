@@ -28,7 +28,7 @@
 }
 
 body {
-    --font-body: "Montserrat-Medium", sans-serif;
+  --font-body: "Montserrat-Medium", sans-serif;
 }
 
 * {
@@ -331,25 +331,50 @@ a.inline-roll {
   background: none;
 }
 
+/*
+* Navigation bar
+*/
+
 #navigation.hidden {
-    display: none !important;
-    width: 0;
-    height: 0;
-    overflow: hidden;
-    visibility: hidden;
-    opacity: 0;
-  } 
+  display: none !important;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+  opacity: 1;
+}
+
+#navigation #scene-list .scene.gm,
+#navigation #scene-list .scene {
+  border: 1px solid black;
+}
+
+#navigation #scene-list .scene {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+#navigation #scene-list .scene.gm {
+  background: rgba(0, 0, 0, 0.75);
+}
+
+#navigation #scene-list .scene.view {
+  border: 1px solid var(--color-primary-medium);
+}
+
+/*
+* Controls
+*/
 
 #navigation {
-    opacity: 0.2;
-    position: fixed;
-    left: 12px;
-    top: 70px;
-    transition: opacity 250ms ease-in-out;
+  opacity: 0.2;
+  position: fixed;
+  left: 12px;
+  top: 70px;
+  transition: opacity 250ms ease-in-out;
 }
-  
+
 #navigation:hover {
-    opacity: 1;
+  opacity: 1;
 }
 
 #players.hidden {
@@ -377,7 +402,7 @@ div#camera-views #players {
 }
 
 #controls.collapsed {
-    right: 30px;
+  right: 30px;
 }
 
 #controls {
@@ -488,7 +513,7 @@ section.effect-panel .icon .badge.unlimited {
 }
 
 section.effect-panel.collapsed {
-    right: 150px !important;
+  right: 150px !important;
 }
 
 section.effect-panel {
@@ -961,6 +986,6 @@ section.effect-panel {
 /**
  * Module: Dungeon Draw
  */
- #dd-control-tools .dd-control-wrapper {
-    right: 450px;
- }
+#dd-control-tools .dd-control-wrapper {
+  right: 450px;
+}
