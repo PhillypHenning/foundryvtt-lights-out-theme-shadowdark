@@ -54,6 +54,7 @@ Since this module heavily alters Foundry's look and elements, some other modules
 Currently, _officially_ supported modules are:
 - [ConversationHUD](https://foundryvtt.com/packages/conversation-hud)
 - [Dice Tray](https://foundryvtt.com/packages/dice-calculator)
+- [Dungeon Draw](https://foundryvtt.com/packages/dungeon-draw)
 
 ## Acknowledgments
 - [erizocosmico](https://github.com/erizocosmico) for their [Fancy UI 5e module](https://github.com/erizocosmico/foundryvtt-fancy-ui-5e). This module uses it as a base and the style and logic has been modified to support the Shadowdark system.
