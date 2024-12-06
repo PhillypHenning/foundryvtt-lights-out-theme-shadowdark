@@ -72,4 +72,14 @@ export function registerSettings() {
         },
         default: 0
     });
+
+    game.settings.register("lights-out-theme-shadowdark", "icon-high-contrast-mode", {
+        name: game.i18n.localize("LIGHTSOUTSD.config_icon_high_contrast_mode"),
+        hint: game.i18n.localize("LIGHTSOUTSD.config_icon_high_contrast_mode_help"),
+        scope: "world",
+        config: true,
+        requiresReload: true,
+        type: Boolean,
+        default: false
+    });
 }

@@ -22,9 +22,13 @@ Hooks.on("renderApplication", async function () {
   (playerListSetting < userPermission) ? $("#players").addClass("hidden") : $("#players").removeClass("hidden");
   (navBarSetting < userPermission) ? $("#navigation").addClass("hidden") : $("#navigation").removeClass("hidden");
 
+  // Enable high contrast mode for icons
+  // This changes a CSS variable to enable/disable the filter
+  let highContrastModeSetting = game.settings.get("lights-out-theme-shadowdark", "icon-high-contrast-mode");
+  document.documentElement.classList.toggle("no-filter", !highContrastModeSetting);
 
-  // NOTE: Shadowdark systems light tracking calls renderApplication
-  // repeatedly. To avoid unnecessary rerenders of the UI, we will only
+  // NOTE: Shadowdark system's light tracking calls renderApplication
+  // repeatedly. To avoid unnecessary re-renders of the UI, we will only
   // call these on the first time around. 
   if (!init) {
     await renderCharacter();

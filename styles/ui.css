@@ -13,6 +13,8 @@
   --color-chat-msg-bg: #111111;
   --color-chat-msg-text: #dddddd;
 
+  --filter-grayscale: grayscale(100%) contrast(1.75);
+
   /**
     * Overriding Shadowdark system variable styles
     */
@@ -944,8 +946,26 @@ section.effect-panel {
 }
 
 /**
+ * Grayscale filter
+ */
+
+.no-filter {
+  --filter-grayscale: none;
+}
+
+.shadowdark img:not(.portrait),
+.SD-header > img:not(.portrait),
+.SD-list .item-image,
+.directory .directory-item img,
+.sheet header.sheet-header img,
+.result-image {
+  filter: var(--filter-grayscale);
+}
+
+/**
  * Animations
  */
+
 .fade-in-up {
   opacity: 0;
   transform: translateY(10px);

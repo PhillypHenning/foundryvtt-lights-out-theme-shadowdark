@@ -17,5 +17,7 @@
     "LIGHTSOUTSD.config_navbar_visibility_help": "Valitse, ketkä näkevät kohtausvalikon. Kohtausvalikon avulla voidaan nopeasti siirtyä kohtauksesta toiseen.",
     "LIGHTSOUTSD.config_visibility_option_0": "Ei kukaan",
     "LIGHTSOUTSD.config_visibility_option_1": "Vain pelinjohtaja",
-    "LIGHTSOUTSD.config_visibility_option_2": "Pelaajat ja pelinjohtaja"
+    "LIGHTSOUTSD.config_visibility_option_2": "Pelaajat ja pelinjohtaja",
+	"LIGHTSOUTSD.config_icon_high_contrast_mode": "Ota korkean kontrastin ikonit käyttöön",
+	"LIGHTSOUTSD.config_icon_high_contrast_mode_help": "[KOKEELLINEN] Tämä asetus muuttaa kaikki ikonit harmaasävyisiksi ja korkeakontrastisiksi. Aseutsta voidaan käyttää, jos värillisten ikonien halutaan muistuttavan enemmän Shadowdark-tyylistä taidetta."
 }

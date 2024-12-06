@@ -17,5 +17,7 @@
     "LIGHTSOUTSD.config_navbar_visibility_help": "Controls who can see the the scene navigation bar used for quickly switching between scenes.",
     "LIGHTSOUTSD.config_visibility_option_0": "None",
     "LIGHTSOUTSD.config_visibility_option_1": "GM only",
-    "LIGHTSOUTSD.config_visibility_option_2": "Players and GM"
+    "LIGHTSOUTSD.config_visibility_option_2": "Players and GM",
+	"LIGHTSOUTSD.config_icon_high_contrast_mode": "Enable high contrast mode for icons",
+	"LIGHTSOUTSD.config_icon_high_contrast_mode_help": "[EXPERIMENTAL] This setting enables a grayscale high contrast filter for all icons for this game. It can be used to achieve more Shadowdark-style iconography while still using colored icons."
 }
