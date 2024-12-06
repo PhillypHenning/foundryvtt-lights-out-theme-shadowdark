@@ -468,6 +468,26 @@ div#camera-views #players {
 }
 
 /**
+ * Loading bar
+ */
+
+#loading {
+  position: fixed;
+  top: 0 !important;
+  left: 0;
+}
+
+#loading #loading-bar {
+  background: var(--color-primary-dark);
+}
+
+#loading label {
+  font-family: var(--font-body);
+  font-size: 14px;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+/**
  * Camera view
  */
 
@@ -484,6 +504,7 @@ div#camera-views #players {
 /**
  * Effect panel
  */
+
 #effect-panel-drag-handler {
 }
 
