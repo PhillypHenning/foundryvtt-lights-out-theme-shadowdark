@@ -18,16 +18,6 @@ export function registerSettings() {
         default: false
     });
 
-    game.settings.register("lights-out-theme-shadowdark", "show_player_hotbar", {
-        name: game.i18n.localize("LIGHTSOUTSD.config_show_player_hotbar"),
-        hint: game.i18n.localize("LIGHTSOUTSD.config_show_player_hotbar_help"),
-        scope: "world",
-        config: true,
-        requiresReload: true,
-        type: Boolean,
-        default: false
-    });
-
     game.settings.register("lights-out-theme-shadowdark", "disable-gm-selected-token", {
         name: game.i18n.localize("LIGHTSOUTSD.config_disable_gm_selected_token"),
         hint: game.i18n.localize("LIGHTSOUTSD.config_disable_gm_selected_token_help"),
@@ -36,5 +26,50 @@ export function registerSettings() {
         requiresReload: true,
         type: Boolean,
         default: false
+    });
+
+    game.settings.register("lights-out-theme-shadowdark", 'hotbar_visibility', {
+        name: game.i18n.localize("LIGHTSOUTSD.config_hotbar_visibility"),
+        hint: game.i18n.localize("LIGHTSOUTSD.config_hotbar_visibility_help"),
+        scope: "world",
+        config: true,
+        requiresReload: true,
+        type: Number,
+        choices: {
+            0: game.i18n.localize("LIGHTSOUTSD.config_visibility_option_0"),
+            1: game.i18n.localize("LIGHTSOUTSD.config_visibility_option_1"),
+            2: game.i18n.localize("LIGHTSOUTSD.config_visibility_option_2")
+        },
+        default: 1
+      });
+      
+    game.settings.register("lights-out-theme-shadowdark", 'players_list_visibility', {
+        name: game.i18n.localize("LIGHTSOUTSD.config_player_list_visibility"),
+        hint: game.i18n.localize("LIGHTSOUTSD.config_player_list_visibility_help"),
+        scope: "world",
+        config: true,
+        requiresReload: true,
+        type: Number,
+        choices: {
+            0: game.i18n.localize("LIGHTSOUTSD.config_visibility_option_0"),
+            1: game.i18n.localize("LIGHTSOUTSD.config_visibility_option_1"),
+            2: game.i18n.localize("LIGHTSOUTSD.config_visibility_option_2")
+        },
+        default: 1
+    });
+
+    game.settings.register("lights-out-theme-shadowdark", 'navbar_visibility', {
+        name: game.i18n.localize("LIGHTSOUTSD.config_navbar_visibility"),
+        hint: game.i18n.localize("LIGHTSOUTSD.config_navbar_visibility_help"),
+        scope: "world",
+        config: true,
+        requiresReload: true,
+        type: Number, 
+        choices: {
+            0: game.i18n.localize("LIGHTSOUTSD.config_visibility_option_0"),
+            1: game.i18n.localize("LIGHTSOUTSD.config_visibility_option_1"),
+            2: game.i18n.localize("LIGHTSOUTSD.config_visibility_option_2")
+        },
+        default: 0
     });
 }
