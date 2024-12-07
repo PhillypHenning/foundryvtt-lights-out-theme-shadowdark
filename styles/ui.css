@@ -389,6 +389,8 @@ a.inline-roll {
 }
 
 #players {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid black;
   opacity: 0.2;
   position: fixed;
   bottom: 0.5rem;
@@ -401,6 +403,14 @@ a.inline-roll {
 
 div#camera-views #players {
   position: relative;
+}
+
+#players h3 {
+  font-family: "Old Newspaper Font";
+}
+
+#context-menu {
+  background-color: black;
 }
 
 #controls.collapsed {
