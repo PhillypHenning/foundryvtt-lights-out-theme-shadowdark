@@ -816,6 +816,10 @@ section.effect-panel {
   position: relative;
 }
 
+.attr#luck-attr {
+  cursor: pointer;
+}
+
 #player-character .character-attrs .attr:not(:first-child)::after {
   content: " ";
   height: 14px;

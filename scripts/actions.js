@@ -23,3 +23,27 @@ export function selectToken() {
     tokens[0].control();
   }
 }
+
+export function changeLuck() {
+  let actor = game.actors.get(this.dataset.id);
+
+  if (actor) {
+    actor.update({ "system.luck.available": !actor.system.luck.available });
+  }
+}
+
+export function changePulpLuck(_, change) {
+  let actor = game.actors.get(this.dataset.id);
+
+  if (actor) {
+    let luckValue = parseInt(actor.system.luck.remaining + change);
+    if (luckValue < 0) luckValue = 0;
+    
+    const updateData = {
+      "system.luck.available": luckValue > 0,
+      "system.luck.remaining": luckValue,
+    };
+
+    actor.update(updateData);
+  }
+}

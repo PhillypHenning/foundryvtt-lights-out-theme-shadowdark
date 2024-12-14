@@ -77,7 +77,7 @@ Hooks.on('controlToken', async function () {
 });
 
 Hooks.once("init", async () => {
-    registerSettings();
+  registerSettings();
   $("body.game").append('<div id="player-character"></div>');
   $("section#ui-left").append('<div id="party"></div>');
 
@@ -102,6 +102,8 @@ Hooks.on('updateUser', async function () {
 
 function activatePlayerListeners() {
   $(document).on("click", "#player-character .sheet", actions.openSheet);
+
+  setupLuckTracker(".attr#luck-attr");
   setupHealthPointsTracker("#current-health");
 }
 
@@ -109,6 +111,23 @@ function activatePartyListeners() {
   $(document).on("dblclick", "#party .character-picture", actions.openSheet);
   $(document).on("click", "#party .character-picture", actions.selectToken);
   setupHealthPointsTracker("#party .current-health");
+}
+
+function setupLuckTracker(element) {
+  const pulpMode = game.settings.get("shadowdark", "usePulpMode");
+
+  $(document).on("click contextmenu", element, function(e) {
+    if (pulpMode) {
+      if (e.button === 0) { // left click
+        actions.changePulpLuck.call(this, e, 1);
+      } else if (e.button === 2) { // right click
+        actions.changePulpLuck.call(this, e, -1);
+      }
+    }
+    else {
+      actions.changeLuck.call(this, e);
+    }
+  });
 }
 
 function setupHealthPointsTracker(element) {
