@@ -9,13 +9,15 @@ export function openSheet() {
     actor = game.actors.get(this.dataset.id);
   }
 
+  console.log(actor);
+
   if (actor) {
     actor.sheet.render(true);
   }
 }
 
 export function selectToken() {
-  const actor = game.actors.get(this.dataset.character);
+  const actor = game.actors.get(this.dataset.id);
   if (!actor) return;
 
   const tokens = actor.getActiveTokens();
