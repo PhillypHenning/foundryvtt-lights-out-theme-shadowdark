@@ -1079,3 +1079,16 @@ section.effect-panel {
 .item-piles-chat-card li:nth-child(odd) {
   background: none;
 }
+
+/**
+ * Module: Rolltable Requester
+ */
+.rolltable-requester-card header {
+  border: none !important;
+}
+
+.rolltable-requester-card header .rr-table-name {
+  color: var(--color-primary) !important;
+  font-family: var(--font-body) !important;
+  font-size: 14px !important;
+}
