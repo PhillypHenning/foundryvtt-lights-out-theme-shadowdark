@@ -467,6 +467,7 @@ div#camera-views #players {
 
 #pause {
   bottom: calc(50% - 50px);
+  left: -50px;
 }
 
 #logo {
