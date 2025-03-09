@@ -1080,6 +1080,11 @@ section.effect-panel {
   background: none;
 }
 
+.item-piles-img,
+.grid-item-image {
+  filter: var(--filter-grayscale);
+}
+
 /**
  * Module: Rolltable Requester
  */
