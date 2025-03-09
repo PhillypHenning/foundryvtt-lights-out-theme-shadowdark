@@ -1065,3 +1065,17 @@ section.effect-panel {
 #dd-control-tools .dd-control-wrapper {
   right: 450px;
 }
+
+
+/**
+ * Module: Item Piles
+ */
+.item-piles-chat-card-title > p:first-of-type {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.item-piles-chat-card li:nth-child(odd) {
+  background: none;
+}
