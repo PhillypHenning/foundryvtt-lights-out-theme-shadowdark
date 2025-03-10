@@ -1086,6 +1086,12 @@ section.effect-panel {
   filter: var(--filter-grayscale);
 }
 
+.item-piles-player-list-trade-button {
+  color: var(--color-primary);
+  background: black;
+  border: 1px solid var(--color-primary);
+}
+
 /**
  * Module: Rolltable Requester
  */
