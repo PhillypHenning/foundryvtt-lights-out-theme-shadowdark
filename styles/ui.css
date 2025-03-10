@@ -1097,4 +1097,6 @@ section.effect-panel {
   color: var(--color-primary) !important;
   font-family: var(--font-body) !important;
   font-size: 14px !important;
+  line-height: 1.5 !important;
+  align-self: center;
 }
