@@ -40,7 +40,7 @@ export function registerSettings() {
             1: game.i18n.localize("LIGHTSOUTSD.config_visibility_option_1"),
             2: game.i18n.localize("LIGHTSOUTSD.config_visibility_option_2")
         },
-        default: 1
+        default: 2
       });
       
     game.settings.register("lights-out-theme-shadowdark", 'players_list_visibility', {
@@ -55,7 +55,7 @@ export function registerSettings() {
             1: game.i18n.localize("LIGHTSOUTSD.config_visibility_option_1"),
             2: game.i18n.localize("LIGHTSOUTSD.config_visibility_option_2")
         },
-        default: 1
+        default: 2
     });
 
     game.settings.register("lights-out-theme-shadowdark", 'navbar_visibility', {
