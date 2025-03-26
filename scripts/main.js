@@ -190,8 +190,11 @@ async function renderCharacter(s = false) {
 
   const character = getCharacter();
   if (!character) {
+    //calculate bottom position of the main UI
+    const body = document.querySelector("body").getBoundingClientRect();
+    const uiInterface = document.querySelector("#interface").getBoundingClientRect();
     elem.parentNode.removeChild(elem);
-    $("body.game").append('<div id="player-character"></div>');
+    $("body.game").append(`<div id="player-character" style="bottom: ${body.height - uiInterface.bottom}px"></div>`);
     return;
   }
 
