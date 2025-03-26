@@ -1009,17 +1009,13 @@ section.effect-panel {
  * Grayscale filter
  */
 
-.no-filter {
-  --filter-grayscale: none;
-}
-
-.shadowdark img:not(.portrait),
-.SD-header > img:not(.portrait),
-.SD-list .item-image,
-.directory .directory-item img,
-.sheet header.sheet-header img,
-.result-image,
-.macro-icon {
+.high-contrast .shadowdark img:not(.portrait),
+.high-contrast .SD-header > img:not(.portrait),
+.high-contrast .SD-list .item-image,
+.high-contrast .directory .directory-item img,
+.high-contrast .sheet header.sheet-header img,
+.high-contrast .result-image,
+.high-contrast .macro-icon {
   filter: var(--filter-grayscale);
 }
 

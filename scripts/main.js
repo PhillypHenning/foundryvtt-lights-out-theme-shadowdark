@@ -25,7 +25,7 @@ Hooks.on("renderApplication", async function () {
   // Enable high contrast mode for icons
   // This changes a CSS variable to enable/disable the filter
   let highContrastModeSetting = game.settings.get("lights-out-theme-shadowdark", "icon-high-contrast-mode");
-  document.documentElement.classList.toggle("no-filter", !highContrastModeSetting);
+  if (highContrastModeSetting) document.documentElement.classList.add("high-contrast");
 
   // NOTE: Shadowdark system's light tracking calls renderApplication
   // repeatedly. To avoid unnecessary re-renders of the UI, we will only
