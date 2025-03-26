@@ -230,6 +230,31 @@ section.chat-sidebar .jump-to-bottom > a {
   font-family: var(--font-body);
 }
 
+.chat-message.whisper {
+  background: black !important;
+}
+
+.chat-message.whisper .dice-roll .dice-result {
+  background-color: #0f0f0f;
+}
+
+.chat-message.whisper .message-sender {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  
+  &::after {
+    content: "";
+    width: 16px;
+    height: 16px;
+    background-image: url("../images/backgrounds/icons/eye-slash-solid.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    filter: invert(1);
+    opacity: 0.4;
+  }
+}
+
 .chat-message,
 .chat-message.whisper {
   background: var(--color-chat-msg-bg);
