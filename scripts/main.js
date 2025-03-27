@@ -48,6 +48,10 @@ Hooks.on("renderSceneControls", (controls, html) => {
     );
     $(".scene-control.sidebar-control").click(async function() {ui.sidebar._collapsed ? ui.sidebar.expand() : ui.sidebar.collapse();})
 
+    const body = document.querySelector("body").getBoundingClientRect();
+    const uiInterface = document.querySelector("#interface").getBoundingClientRect();
+    $("#controls").css('right', body.width - uiInterface.right);
+
     //move controls and effects panel to match the sidebar's collapsed state
     if (ui.sidebar._collapsed) {
         $("#controls").addClass("collapsed");
@@ -61,6 +65,7 @@ Hooks.on("renderSceneControls", (controls, html) => {
 
 Hooks.on("collapseSidebar", (sidebar, collapsed) => {
     ui.controls.render();
+    game.shadowdark.effectPanel.render();
 });
 
 Hooks.on("updateActor", async function (actor) {
