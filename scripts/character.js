@@ -1,8 +1,6 @@
-import { isGm } from "./utils.js";
-
 export function getCharacter() {
   // if GM and canvas has loaded
-  if (isGm() && canvas.tokens) {
+  if (game.user.isGM && canvas.tokens) {
     const tokens = canvas.tokens.controlled;
     if (tokens.length === 0 || tokens.length > 1) return null;
 
