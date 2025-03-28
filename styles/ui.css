@@ -343,7 +343,7 @@ a.inline-roll {
 
 #hotbar {
   opacity: 0.2;
-  position: fixed;
+  position: absolute;
   top: 0.5rem;
   left: 0;
   margin: 10px 0px 0px 10px;
@@ -394,7 +394,7 @@ a.inline-roll {
 
 #navigation {
   opacity: 0.2;
-  position: fixed;
+  position: absolute;
   left: 12px;
   top: 70px;
   transition: opacity 250ms ease-in-out;
@@ -417,7 +417,7 @@ a.inline-roll {
   background: rgba(0, 0, 0, 0.5);
   border: 1px solid black;
   opacity: 0.2;
-  position: fixed;
+  position: absolute;
   bottom: 0.5rem;
   transition: opacity 250ms ease-in-out;
 }

@@ -58,9 +58,7 @@ Hooks.on("renderSceneControls", (controls, html) => {
     );
     $(".scene-control.sidebar-control").click(async function() {ui.sidebar._collapsed ? ui.sidebar.expand() : ui.sidebar.collapse();})
 
-    const body = document.querySelector("body").getBoundingClientRect();
-    const uiInterface = document.querySelector("#interface").getBoundingClientRect();
-    $("#controls").css('right', body.width - uiInterface.right);
+    $("#controls").css('right', uiEdges().right);
 
     //move controls and effects panel to match the sidebar's collapsed state
     if (ui.sidebar._collapsed) {
@@ -76,6 +74,14 @@ Hooks.on("renderSceneControls", (controls, html) => {
 Hooks.on("collapseSidebar", (sidebar, collapsed) => {
     ui.controls.render();
     game.shadowdark.effectPanel.render();
+});
+
+// re-render scene controls when AV dock position changes.
+Hooks.on("rtcSettingsChanged", async (settings, changes) => {
+    if (changes.client) {
+        if ("hideDock" in changes.client || "dockPosition" in changes.client) 
+            ui.controls.render();
+    }
 });
 
 Hooks.on("updateActor", async function (actor) {
@@ -191,11 +197,8 @@ async function renderCharacter(s = false) {
 
   const character = getCharacter();
   if (!character) {
-    //calculate bottom position of the main UI
-    const body = document.querySelector("body").getBoundingClientRect();
-    const uiInterface = document.querySelector("#interface").getBoundingClientRect();
     elem.parentNode.removeChild(elem);
-    $("body.game").append(`<div id="player-character" style="bottom: ${body.height - uiInterface.bottom}px"></div>`);
+    $("body.game").append(`<div id="player-character" style="bottom: ${uiEdges().bottom}px"></div>`);
     return;
   }
 
@@ -242,4 +245,15 @@ async function renderParty() {
 
 function userPermission() {
     return game.user.isGM ? 1 : 2; // GMs = 1, Players = 2
+}
+
+function uiEdges() {
+    const body = document.querySelector("body").getBoundingClientRect();
+    const uiInterface = document.querySelector("#interface").getBoundingClientRect();
+    return {
+        top: uiInterface.top,
+        left: uiInterface.left,
+        right: body.width - uiInterface.right,
+        bottom: body.height - uiInterface.bottom
+    }
 }
