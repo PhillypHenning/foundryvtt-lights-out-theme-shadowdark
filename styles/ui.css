@@ -256,7 +256,8 @@ section.chat-sidebar .jump-to-bottom > a {
 }
 
 .chat-message,
-.chat-message.whisper {
+.chat-message.whisper,
+.chat-message.emote {
   background: var(--color-chat-msg-bg);
   color: var(--color-chat-msg-text);
   border-radius: 2px;
