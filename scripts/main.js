@@ -5,37 +5,47 @@ import {
   tokenData
 } from "./character.js";
 import * as actions from "./actions.js";
-import { isGm } from "./utils.js";
 import { registerSettings } from "./settings.js";
 
-let init = false;
+Hooks.once("init", async () => {
+    registerSettings();
+    $("body.game").append('<div id="player-character"></div>');
+    $("section#ui-left").append('<div id="party"></div>');
+  
+    await loadTemplates([
+      "modules/lights-out-theme-shadowdark/templates/character.hbs",
+      "modules/lights-out-theme-shadowdark/templates/party.hbs",
+    ]);
+  
+    activatePlayerListeners();
+    activatePartyListeners();
+  });
 
-Hooks.on("renderApplication", async function () {
-  // Get visibility settings for UI elements
-  let hotBarSetting = game.settings.get("lights-out-theme-shadowdark", "hotbar_visibility");
-  let playerListSetting = game.settings.get("lights-out-theme-shadowdark", "players_list_visibility");
-  let navBarSetting = game.settings.get("lights-out-theme-shadowdark", "navbar_visibility");
-  let userPermission = isGm() ? 1 : 2; // GMs = 1, Players = 2
+Hooks.on("ready", async () => {
+    // Enable high contrast mode for icons
+    // This changes a CSS variable to enable/disable the filter
+    let highContrastModeSetting = game.settings.get("lights-out-theme-shadowdark", "icon-high-contrast-mode");
+    if (highContrastModeSetting) document.documentElement.classList.add("high-contrast");
 
-  // Hide UI elements if current player permissions are below the global setting
-  (hotBarSetting < userPermission) ? $("#hotbar").addClass("hidden") : $("#hotbar").removeClass("hidden");
-  (playerListSetting < userPermission) ? $("#players").addClass("hidden") : $("#players").removeClass("hidden");
-  (navBarSetting < userPermission) ? $("#navigation").addClass("hidden") : $("#navigation").removeClass("hidden");
-
-  // Enable high contrast mode for icons
-  // This changes a CSS variable to enable/disable the filter
-  let highContrastModeSetting = game.settings.get("lights-out-theme-shadowdark", "icon-high-contrast-mode");
-  document.documentElement.classList.toggle("no-filter", !highContrastModeSetting);
-
-  // NOTE: Shadowdark system's light tracking calls renderApplication
-  // repeatedly. To avoid unnecessary re-renders of the UI, we will only
-  // call these on the first time around. 
-  if (!init) {
+    //initial render of ui components
     await renderCharacter();
     await renderParty();
+});
 
-    init = true;
-  }
+// Hide UI elements if current player permissions are below the global setting
+Hooks.on("renderHotbar", async (app, html) => {
+    const hotBarSetting = game.settings.get("lights-out-theme-shadowdark", "hotbar_visibility");
+    (hotBarSetting < userPermission()) ? app.element.addClass("hidden") : app.element.removeClass("hidden");
+});
+
+Hooks.on("renderPlayerList", async (app, html) => {
+    let playerListSetting = game.settings.get("lights-out-theme-shadowdark", "players_list_visibility");
+    (playerListSetting < userPermission()) ? app.element.addClass("hidden") : app.element.removeClass("hidden");
+});
+
+Hooks.on("renderSceneNavigation", async (app, html) => {
+    let navBarSetting = game.settings.get("lights-out-theme-shadowdark", "navbar_visibility");
+    (navBarSetting < userPermission()) ? app.element.addClass("hidden") : app.element.removeClass("hidden");
 });
 
 Hooks.on("renderSceneControls", (controls, html) => {
@@ -47,6 +57,8 @@ Hooks.on("renderSceneControls", (controls, html) => {
         </li>`
     );
     $(".scene-control.sidebar-control").click(async function() {ui.sidebar._collapsed ? ui.sidebar.expand() : ui.sidebar.collapse();})
+
+    $("#controls").css('right', uiEdges().right);
 
     //move controls and effects panel to match the sidebar's collapsed state
     if (ui.sidebar._collapsed) {
@@ -61,10 +73,19 @@ Hooks.on("renderSceneControls", (controls, html) => {
 
 Hooks.on("collapseSidebar", (sidebar, collapsed) => {
     ui.controls.render();
+    game.shadowdark.effectPanel.render();
+});
+
+// re-render scene controls when AV dock position changes.
+Hooks.on("rtcSettingsChanged", async (settings, changes) => {
+    if (changes.client) {
+        if ("hideDock" in changes.client || "dockPosition" in changes.client) 
+            ui.controls.render();
+    }
 });
 
 Hooks.on("updateActor", async function (actor) {
-  if (isGm() || actor.id === getCharacter()?.id) {
+  if (game.user.isGM || actor.id === getCharacter()?.id) {
     await renderCharacter();
   }
   
@@ -72,22 +93,8 @@ Hooks.on("updateActor", async function (actor) {
 });
 
 Hooks.on('controlToken', async function () {
-  if (!isGm() || game.settings.get("lights-out-theme-shadowdark", "disable-gm-selected-token")) return;
+  if (!game.user.isGM || game.settings.get("lights-out-theme-shadowdark", "disable-gm-selected-token")) return;
   await renderCharacter(true);
-});
-
-Hooks.once("init", async () => {
-  registerSettings();
-  $("body.game").append('<div id="player-character"></div>');
-  $("section#ui-left").append('<div id="party"></div>');
-
-  await loadTemplates([
-    "modules/lights-out-theme-shadowdark/templates/character.hbs",
-    "modules/lights-out-theme-shadowdark/templates/party.hbs",
-  ]);
-
-  activatePlayerListeners();
-  activatePartyListeners();
 });
 
 Hooks.on('userConnected', async function () {
@@ -191,7 +198,7 @@ async function renderCharacter(s = false) {
   const character = getCharacter();
   if (!character) {
     elem.parentNode.removeChild(elem);
-    $("body.game").append('<div id="player-character"></div>');
+    $("body.game").append(`<div id="player-character" style="bottom: ${uiEdges().bottom}px"></div>`);
     return;
   }
 
@@ -234,4 +241,19 @@ async function renderParty() {
   elem.innerHTML = tpl;
 
   elem.style.top = `${window.innerHeight / 2 - elem.clientHeight / 2}px`;
+}
+
+function userPermission() {
+    return game.user.isGM ? 1 : 2; // GMs = 1, Players = 2
+}
+
+function uiEdges() {
+    const body = document.querySelector("body").getBoundingClientRect();
+    const uiInterface = document.querySelector("#interface").getBoundingClientRect();
+    return {
+        top: uiInterface.top,
+        left: uiInterface.left,
+        right: body.width - uiInterface.right,
+        bottom: body.height - uiInterface.bottom
+    }
 }
