@@ -46,6 +46,13 @@ Hooks.on("renderPlayerList", async (app, html) => {
 Hooks.on("renderSceneNavigation", async (app, html) => {
     let navBarSetting = game.settings.get("lights-out-theme-shadowdark", "navbar_visibility");
     (navBarSetting < userPermission()) ? app.element.addClass("hidden") : app.element.removeClass("hidden");
+
+    // Adjust #navigation top position based on hotbar visibility
+    const hotBarSetting = game.settings.get("lights-out-theme-shadowdark", "hotbar_visibility");
+    const navigationElement = document.getElementById("navigation");
+    if (navigationElement) {
+        navigationElement.classList.toggle("with-hotbar", hotBarSetting);
+    }
 });
 
 Hooks.on("renderSceneControls", (controls, html) => {
