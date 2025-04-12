@@ -56,6 +56,13 @@ Currently, _officially_ supported modules are:
 - [Dice Tray](https://foundryvtt.com/packages/dice-calculator)
 - [Dungeon Draw](https://foundryvtt.com/packages/dungeon-draw)
 
+## Translations
+Making translations is a great way to contribute. The aim is to get this module to fully translated to all languages the Shadowdark system supports.
+
+Crowdin is used to make translation work as simple as possible, and requires no development experience. 
+
+You can join the translation effort by visiting the following link: https://crowdin.com/project/shadowdark-lights-out-theme
+
 ## Acknowledgments
 - [erizocosmico](https://github.com/erizocosmico) for their [Fancy UI 5e module](https://github.com/erizocosmico/foundryvtt-fancy-ui-5e). This module uses it as a base and the style and logic has been modified to support the Shadowdark system.
 - [The Arcane Library](https://www.thearcanelibrary.com) for the art assets that are seen in the screenshots
