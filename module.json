@@ -19,9 +19,9 @@
     ],
     "languages": [
         {
-            "lang": "de",
-            "name": "Deutsch",
-            "path": "languages/de.json"
+            "lang": "da",
+            "name": "Danish",
+            "path": "languages/da.json"
         },
         {
             "lang": "en",
