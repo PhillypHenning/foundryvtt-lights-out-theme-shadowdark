@@ -84,6 +84,8 @@ export async function characterData(c) {
 
 export async function tokenData(t) {
   const actor = game.actors.get(t.actorId);
+  if (!actor) return;
+  
   const actorSystem = actor.system;
   const tokenSystem = t.delta.system;
 
