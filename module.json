@@ -49,9 +49,9 @@
             "path": "languages/ko.json"
         },
         {
-            "lang": "pt-BR",
+            "lang": "pt",
             "name": "Português (Brasil)",
-            "path": "languages/pt_BR.json"
+            "path": "languages/pt.json"
         },
         {
             "lang": "ru",
