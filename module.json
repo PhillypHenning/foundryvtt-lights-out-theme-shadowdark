@@ -19,16 +19,49 @@
     ],
     "languages": [
         {
+            "lang": "de",
+            "name": "Deutsch",
+            "path": "languages/de.json"
+        },
+        {
             "lang": "en",
             "name": "English",
-            "path": "languages/en.json",
-            "flags": {}
+            "path": "languages/en.json"
+        },
+        {
+            "lang": "es",
+            "name": "Español",
+            "path": "languages/es.json"
         },
         {
             "lang": "fi",
             "name": "suomi",
-            "path": "languages/fi.json",
-            "flags": {}
+            "path": "languages/fi.json"
+        },
+        {
+            "lang": "fr",
+            "name": "Français",
+            "path": "languages/fr.json"
+        },
+        {
+            "lang": "ko",
+            "name": "한국어",
+            "path": "languages/ko.json"
+        },
+        {
+            "lang": "pt-BR",
+            "name": "Português (Brasil)",
+            "path": "languages/pt_BR.json"
+        },
+        {
+            "lang": "ru",
+            "name": "Russian",
+            "path": "languages/ru.json"
+        },
+        {
+            "lang": "sv",
+            "name": "Svenska",
+            "path": "languages/sv.json"
         }
     ],
     "compatibility": {
