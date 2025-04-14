@@ -2,9 +2,10 @@
 <p align="center"><sup><i>Let There Be Darkness...</i></sup></p>
 <p align="center">
   <img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fronijaakkola%2Ffoundryvtt-lights-out-theme-shadowdark%2Fmain%2Fmodule.json&query=%24.compatibility.verified&logo=foundryvirtualtabletop&logoColor=white&label=Foundry%20version&labelColor=%23FE6A1F&color=black" />
-  <img src="https://img.shields.io/badge/system-shadowdark-black?labelColor=white" />
+  <a href="https://foundryvtt.com/packages/shadowdark"><img src="https://img.shields.io/badge/system-shadowdark-black?labelColor=white" /></a>
   <img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fronijaakkola%2Ffoundryvtt-lights-out-theme-shadowdark%2Fmain%2Fmodule.json&query=%24.version&logoColor=white&label=version&labelColor=white&color=black" />
   <img src="https://img.shields.io/github/downloads/ronijaakkola/foundryvtt-lights-out-theme-shadowdark/module.zip?style=flat&labelColor=white&color=black" />
+  <a href="https://crowdin.com/project/shadowdark-lights-out-theme"><img src="https://badges.crowdin.net/shadowdark-lights-out-theme/localized.svg" /></a>
 </p>
 
 <p align="center"><i>This module adds a darker and more fitting user interface theme for the Shadowdark system in the FoundryVTT platform. It simplifies the player view by providing character and party panels. These panels can be used for quick access to token hit points and other information.</i></p>
@@ -55,6 +56,13 @@ Currently, _officially_ supported modules are:
 - [ConversationHUD](https://foundryvtt.com/packages/conversation-hud)
 - [Dice Tray](https://foundryvtt.com/packages/dice-calculator)
 - [Dungeon Draw](https://foundryvtt.com/packages/dungeon-draw)
+
+## Translations
+Making translations is a great way to contribute. The aim is to get this module to fully translated to all languages the Shadowdark system supports.
+
+Crowdin is used to make translation work as simple as possible, and requires no development experience. 
+
+You can join the translation effort by visiting the following link: https://crowdin.com/project/shadowdark-lights-out-theme
 
 ## Acknowledgments
 - [erizocosmico](https://github.com/erizocosmico) for their [Fancy UI 5e module](https://github.com/erizocosmico/foundryvtt-fancy-ui-5e). This module uses it as a base and the style and logic has been modified to support the Shadowdark system.
