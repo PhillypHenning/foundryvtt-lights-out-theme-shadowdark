@@ -8,6 +8,8 @@
   <a href="https://crowdin.com/project/shadowdark-lights-out-theme"><img src="https://badges.crowdin.net/shadowdark-lights-out-theme/localized.svg" /></a>
 </p>
 
+<p align="center"><a href="https://ko-fi.com/ronihelppi"><img src="https://github.com/user-attachments/assets/0a7e973f-15af-40ce-803c-1734f5bc7d7c" width="161" alt="Buy Me a Torch Button" /></a></p>
+
 <p align="center"><i>This module adds a darker and more fitting user interface theme for the Shadowdark system in the FoundryVTT platform. It simplifies the player view by providing character and party panels. These panels can be used for quick access to token hit points and other information.</i></p>
 
 ![theme-screenshot-player-view](https://github.com/user-attachments/assets/6805e871-f0f6-483a-a5df-518e6fd3a03f)
