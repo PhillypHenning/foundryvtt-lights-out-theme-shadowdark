@@ -1135,3 +1135,10 @@ section.effect-panel {
   line-height: 1.5 !important;
   align-self: center;
 }
+
+/**
+  * Module: Puzzle Lock
+  */
+.puzzle-lock .puzzle-lock-interactions {
+  right: 100px !important;
+}
