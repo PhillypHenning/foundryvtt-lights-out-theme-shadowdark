@@ -6,6 +6,7 @@ import {
 } from "./character.js";
 import * as actions from "./actions.js";
 import { registerSettings } from "./settings.js";
+import { TestApp } from "./apps/test-app.js";
 
 Hooks.once("init", async () => {
     registerSettings();
@@ -19,9 +20,9 @@ Hooks.once("init", async () => {
   
     activatePlayerListeners();
     activatePartyListeners();
-  });
+});
 
-Hooks.on("ready", async () => {
+Hooks.once("ready", async () => {
     // Enable high contrast mode for icons
     // This changes a CSS variable to enable/disable the filter
     let highContrastModeSetting = game.settings.get("lights-out-theme-shadowdark", "icon-high-contrast-mode");
@@ -30,6 +31,18 @@ Hooks.on("ready", async () => {
     //initial render of ui components
     await renderCharacter();
     await renderParty();
+
+    console.log("Lights Out Theme | Ready");
+
+    // Create and render our test app
+    const testApp = new TestApp();
+    testApp.render(true);
+});
+
+Hooks.on("renderSettings", function (app, html) {
+  $('<div class="lights-out-block"></div>').insertAfter(
+    $(html).find('section[data-tab="modules"]')
+  );
 });
 
 // Hide UI elements if current player permissions are below the global setting
