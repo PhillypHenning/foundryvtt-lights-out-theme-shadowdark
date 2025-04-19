@@ -527,7 +527,7 @@ a.content-link:hover {
   border: 1px solid var(--color-primary);
 }
 
-locked-tooltip.link-matches a.content-link {
+.locked-tooltip.link-matches a.content-link {
   color: var(--color-primary-medium);
 }
 
