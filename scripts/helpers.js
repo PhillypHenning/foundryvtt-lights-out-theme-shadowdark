@@ -26,6 +26,7 @@ export function setupLuckTracker(element) {
 } 
 
 export function setupHealthPointsTracker(element) {
+    console.log("Setting up health points tracker for element:", document.querySelector(element));
     document.querySelector(element).addEventListener("focus", function () {
         this.value = "";
     });

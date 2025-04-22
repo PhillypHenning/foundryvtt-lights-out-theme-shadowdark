@@ -5,20 +5,18 @@ import {
   tokenData
 } from "./character.js";
 import * as actions from "./actions.js";
+import { setupHealthPointsTracker } from "./helpers.js";
 import { registerSettings } from "./settings.js";
 import { CharacterPanelApp } from "./apps/CharacterPanelApp.js";
 
 Hooks.once("init", async () => {
     registerSettings();
-    $("body.game").append('<div id="player-character"></div>');
     $("section#ui-left").append('<div id="party"></div>');
   
     await loadTemplates([
       "modules/lights-out-theme-shadowdark/templates/character.hbs",
       "modules/lights-out-theme-shadowdark/templates/party.hbs",
     ]);
-  
-    activatePartyListeners();
 });
 
 Hooks.once("ready", async () => {
@@ -35,6 +33,8 @@ Hooks.once("ready", async () => {
     //initial render of ui components
     await renderCharacter();
     await renderParty();
+
+    activatePartyListeners();
 
     console.log("Lights Out Theme | Ready");
 });
@@ -133,77 +133,6 @@ function activatePartyListeners() {
   setupHealthPointsTracker("#party .current-health");
 }
 
-function setupLuckTracker(element) {
-  const pulpMode = game.settings.get("shadowdark", "usePulpMode");
-
-  $(document).on("click contextmenu", element, function(e) {
-    if (pulpMode) {
-      if (e.button === 0) { // left click
-        actions.changePulpLuck.call(this, e, 1);
-      } else if (e.button === 2) { // right click
-        actions.changePulpLuck.call(this, e, -1);
-      }
-    }
-    else {
-      actions.changeLuck.call(this, e);
-    }
-  });
-}
-
-function setupHealthPointsTracker(element) {
-  $(document).on("focus", element, function () {
-    this.value = "";
-  });
-
-  $(document).on("blur", element, function () {
-    this.value = this.dataset.value;
-  });
-
-  $(document).on("keyup", element, function (e) {
-    if (e.keyCode !== 13) {
-      return;
-    }
-
-    e.preventDefault();
-    e.stopPropagation();
-
-    let actor;
-    if (this.dataset.token === "true") {
-      let scene = game.canvas.scene;
-      actor = scene.tokens.find(item => item.delta.id === this.dataset.id).actor;
-    }
-    else {
-      actor = game.actors.get(this.dataset.id);
-    }
-
-    if (!actor) {
-      return;
-    }
-
-    const currentHP = this.dataset.value;
-    const inputValue = this.value.trim();
-
-    let damageAmount;
-    let multiplier;
-
-    if (inputValue.startsWith('+')) {
-      damageAmount = parseInt(inputValue.slice(1), 10);
-      multiplier = -1;
-    } else if (inputValue.startsWith('-')) {
-      damageAmount = parseInt(inputValue.slice(1), 10);
-      multiplier = 1;
-    } else {
-      const newHP = parseInt(inputValue, 10);
-      damageAmount = currentHP - newHP;
-      multiplier = 1; 
-    }
-
-    if (!isNaN(damageAmount)) {
-      actor.applyDamage(damageAmount, multiplier);
-    }
-  });
-}
-
 async function renderCharacter(s = false) {
   const elem = document.getElementById("player-character");
   if (!elem) return;
@@ -233,15 +162,6 @@ async function renderCharacter(s = false) {
   data.selected = s;
 
   game.lightsOutTheme.characterPanel.updateData(data);
-
-  /*
-  const tpl = await renderTemplate(
-    "modules/lights-out-theme-shadowdark/templates/character.hbs",
-    data
-  );
-
-  elem.innerHTML = tpl;
-  */
 }
 
 async function renderParty() {
@@ -257,6 +177,8 @@ async function renderParty() {
   elem.innerHTML = tpl;
 
   elem.style.top = `${window.innerHeight / 2 - elem.clientHeight / 2}px`;
+
+  activatePartyListeners();
 }
 
 function userPermission() {
