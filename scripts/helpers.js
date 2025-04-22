@@ -75,5 +75,8 @@ export function setupHealthPointsTracker(element) {
         if (!isNaN(damageAmount)) {
             actor.applyDamage(damageAmount, multiplier);
         }
+
+        // Automatically blur (remove focus) from the input after execution
+        this.blur();
     });
 }
