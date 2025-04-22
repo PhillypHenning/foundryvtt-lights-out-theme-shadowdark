@@ -6,7 +6,7 @@ import {
 } from "./character.js";
 import * as actions from "./actions.js";
 import { registerSettings } from "./settings.js";
-import { CharacterPanelApp } from "./apps/character-panel-app.js";
+import { CharacterPanelApp } from "./apps/CharacterPanelApp.js";
 
 Hooks.once("init", async () => {
     registerSettings();

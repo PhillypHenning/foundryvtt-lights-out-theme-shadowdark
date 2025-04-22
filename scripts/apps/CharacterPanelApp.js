@@ -1,4 +1,4 @@
-import * as actions from "../actions.js";
+import { openSheet } from "../actions.js";
 import { setupLuckTracker, setupHealthPointsTracker } from "../helpers.js";
 
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api
@@ -96,7 +96,7 @@ export class CharacterPanelApp extends HandlebarsApplicationMixin(ApplicationV2)
         const playerCharacter = document.querySelector("#player-character");
         if (playerCharacter) {
             playerCharacter.querySelectorAll(".sheet").forEach(el => {
-                el.addEventListener("click", actions.openSheet);
+                el.addEventListener("click", openSheet);
             });
         }
 
