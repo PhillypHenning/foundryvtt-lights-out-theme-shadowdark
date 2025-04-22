@@ -39,6 +39,7 @@ export class CharacterPanelApp extends HandlebarsApplicationMixin(ApplicationV2)
         if (elem) {
             elem.classList.remove("fade-out");
             elem.classList.add("fade-in-up");
+            elem.style.pointerEvents = "auto";
         }
     }
 
@@ -47,6 +48,7 @@ export class CharacterPanelApp extends HandlebarsApplicationMixin(ApplicationV2)
         if (elem) {
             elem.classList.remove("fade-in-up");
             elem.classList.add("fade-out");
+            elem.style.pointerEvents = "none";
         }
     }
 
