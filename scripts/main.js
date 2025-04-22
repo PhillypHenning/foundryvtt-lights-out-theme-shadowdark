@@ -6,7 +6,7 @@ import {
 } from "./character.js";
 import * as actions from "./actions.js";
 import { registerSettings } from "./settings.js";
-import { TestApp } from "./apps/test-app.js";
+import { CharacterPanelApp } from "./apps/character-panel-app.js";
 
 Hooks.once("init", async () => {
     registerSettings();
@@ -28,15 +28,16 @@ Hooks.once("ready", async () => {
     let highContrastModeSetting = game.settings.get("lights-out-theme-shadowdark", "icon-high-contrast-mode");
     if (highContrastModeSetting) document.documentElement.classList.add("high-contrast");
 
+    // Create and render apps
+    game.lightsOutTheme = game.lightsOutTheme || {};
+    game.lightsOutTheme.characterPanel = new CharacterPanelApp();
+    game.lightsOutTheme.characterPanel.render(true);
+
     //initial render of ui components
     await renderCharacter();
     await renderParty();
 
     console.log("Lights Out Theme | Ready");
-
-    // Create and render our test app
-    const testApp = new TestApp();
-    testApp.render(true);
 });
 
 Hooks.on("renderSettings", function (app, html) {
@@ -217,8 +218,7 @@ async function renderCharacter(s = false) {
 
   const character = getCharacter();
   if (!character) {
-    elem.parentNode.removeChild(elem);
-    $("body.game").append(`<div id="player-character" style="bottom: ${uiEdges().bottom}px"></div>`);
+    game.lightsOutTheme.characterPanel.hide();
     return;
   }
 
@@ -240,12 +240,16 @@ async function renderCharacter(s = false) {
   // Mark if the render was triggered by a selection
   data.selected = s;
 
+  game.lightsOutTheme.characterPanel.updateData(data);
+
+  /*
   const tpl = await renderTemplate(
     "modules/lights-out-theme-shadowdark/templates/character.hbs",
     data
   );
 
   elem.innerHTML = tpl;
+  */
 }
 
 async function renderParty() {
