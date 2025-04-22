@@ -9,8 +9,6 @@ export function openSheet() {
     actor = game.actors.get(this.dataset.id);
   }
 
-  console.log(actor);
-
   if (actor) {
     actor.sheet.render(true);
   }

@@ -18,7 +18,6 @@ Hooks.once("init", async () => {
       "modules/lights-out-theme-shadowdark/templates/party.hbs",
     ]);
   
-    activatePlayerListeners();
     activatePartyListeners();
 });
 
@@ -127,13 +126,6 @@ Hooks.on('updateUser', async function () {
   await renderCharacter();
   await renderParty();
 });
-
-function activatePlayerListeners() {
-  $(document).on("click", "#player-character .sheet", actions.openSheet);
-
-  setupLuckTracker(".attr#luck-attr");
-  setupHealthPointsTracker("#current-health");
-}
 
 function activatePartyListeners() {
   $(document).on("dblclick", "#party .character-picture", actions.openSheet);

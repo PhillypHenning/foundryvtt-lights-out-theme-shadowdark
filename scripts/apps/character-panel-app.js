@@ -1,3 +1,6 @@
+import * as actions from "../actions.js";
+import { setupLuckTracker, setupHealthPointsTracker } from "../helpers.js";
+
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api
 
 export class CharacterPanelApp extends HandlebarsApplicationMixin(ApplicationV2) {
@@ -67,9 +70,7 @@ export class CharacterPanelApp extends HandlebarsApplicationMixin(ApplicationV2)
     }
 
     _insertElement(element) {
-        console.log("Inserting element", element);
         const existing = document.getElementById(element.id);
-        console.log("Existing element", existing);
         
         const container = document.querySelector("#ui-bottom");
         
@@ -91,7 +92,15 @@ export class CharacterPanelApp extends HandlebarsApplicationMixin(ApplicationV2)
     }
 
     _onRender(context, options) {
+        // Event listener for opening the character sheet
+        const playerCharacter = document.querySelector("#player-character");
+        if (playerCharacter) {
+            playerCharacter.querySelectorAll(".sheet").forEach(el => {
+                el.addEventListener("click", actions.openSheet);
+            });
+        }
 
+        setupLuckTracker(".attr#luck-attr");
+        setupHealthPointsTracker("#current-health");
     }
-
 }
