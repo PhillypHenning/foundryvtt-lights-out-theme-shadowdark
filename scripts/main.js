@@ -13,8 +13,8 @@ Hooks.once("init", async () => {
     $("section#ui-left").append('<div id="party"></div>');
   
     await loadTemplates([
-      "modules/lights-out-theme-shadowdark-ph-testing/templates/character.hbs",
-      "modules/lights-out-theme-shadowdark-ph-testing/templates/party.hbs",
+      "modules/lights-out-theme-shadowdark/templates/character.hbs",
+      "modules/lights-out-theme-shadowdark/templates/party.hbs",
     ]);
   
     activatePlayerListeners();
@@ -243,7 +243,7 @@ async function renderParty() {
   const partyVisibility = game.settings.get("lights-out-theme-shadowdark", "party_details_config")
   const playerHealthVisibility = game.settings.get("lights-out-theme-shadowdark", "party_details_health_config")
 
-  const tpl = await renderTemplate("modules/lights-out-theme-shadowdark-ph-testing/templates/party.hbs", {
+  const tpl = await renderTemplate("modules/lights-out-theme-shadowdark/templates/party.hbs", {
     characters,
     partyVisibility,
     playerHealthVisibility
