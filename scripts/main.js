@@ -242,7 +242,9 @@ async function renderParty() {
   const characters = await Promise.all(getPartyCharacters().map(characterData));
   const partyVisibility = game.settings.get("lights-out-theme-shadowdark", "party_details_config")
   console.log("partyVisibility:", partyVisibility); // Should be true/false
-  typeof game.settings.get("lights-out-theme-shadowdark", "party_details_config")
+  console.log("settings typeof:", typeof game.settings.get("lights-out-theme-shadowdark", "party_details_config"))
+  console.log("partyVisibility typeof:", typeof game.settings.get("lights-out-theme-shadowdark", "party_details_config"))
+
 
   const tpl = await renderTemplate("modules/lights-out-theme-shadowdark/templates/party.hbs", {
     characters,
