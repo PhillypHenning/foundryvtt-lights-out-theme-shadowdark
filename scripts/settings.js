@@ -92,4 +92,14 @@ export function registerSettings() {
         type: Boolean,
         default: true
     });
+    
+    game.settings.register("lights-out-theme-shadowdark", "party_details_health_config", {
+        name: game.i18n.localize("LIGHTSOUTSD.config_party_details_health_visibility"),
+        hint: game.i18n.localize("LIGHTSOUTSD.config_party_details_health_visibility_help"),
+        scope: "world",
+        config: true,
+        requiresReload: true,
+        type: Boolean,
+        default: true
+    });
 }

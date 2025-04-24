@@ -241,14 +241,13 @@ async function renderParty() {
 
   const characters = await Promise.all(getPartyCharacters().map(characterData));
   const partyVisibility = game.settings.get("lights-out-theme-shadowdark", "party_details_config")
-  console.log("partyVisibility:", partyVisibility); // Should be true/false
-  console.log("settings typeof:", typeof game.settings.get("lights-out-theme-shadowdark", "party_details_config"))
-  console.log("partyVisibility typeof:", typeof game.settings.get("lights-out-theme-shadowdark", "party_details_config"))
-
+  const playerHealthVisibility = game.settings.get("lights-out-theme-shadowdark", "party_details_health_config")
+  console.log("playerHealthVisibility: ", playerHealthVisibility)
 
   const tpl = await renderTemplate("modules/lights-out-theme-shadowdark-ph-testing/templates/party.hbs", {
     characters,
-    partyVisibility
+    partyVisibility,
+    playerHealthVisibility
   });
 
   elem.innerHTML = tpl;

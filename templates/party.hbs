@@ -1,5 +1,4 @@
 {{#if partyVisibility}}
-    <div>Party is visible!</div>
     {{#each characters as |c|}}
     <div class="party-character">
         <div class="character-picture" data-id="{{c.id}}">
@@ -14,18 +13,20 @@
                 </div>
                 <div class="character-health">
                     <div class="bar-wrapper">
-                        <div class="bar {{hp.status}}" style="width: {{hp.percent}}%"></div>
+                        {{#if playerHealthVisibility}}
+                            <div class="bar {{hp.status}}" style="width: {{hp.percent}}%"></div>
 
-                        <input type="text" class="current-health" data-value="{{hp.value}}" data-id="{{id}}"
-                            value="{{hp.value}}" />
-                        <span class="divider">/</span>
-                        <input type="text" value="{{hp.max}}" disabled />
+                            <input type="text" class="current-health" data-value="{{hp.value}}" data-id="{{id}}"
+                                value="{{hp.value}}" />
+                            <span class="divider">/</span>
+                            <input type="text" value="{{hp.max}}" disabled />
+                        {{else}}
+                            <div class="bar hidden" style="width: 99%"></div>
+                        {{/if}}
                     </div>
                 </div>
             </div>
         </div>
     </div>
     {{/each}}
-{{else}}
-  <div>Party is HIDDEN!</div>
 {{/if}}
