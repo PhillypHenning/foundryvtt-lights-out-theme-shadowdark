@@ -1,41 +1,38 @@
 import * as actions from "./actions.js";
 
 export function setupLuckTracker(element) {
-  const pulpMode = game.settings.get("shadowdark", "usePulpMode");
+    const pulpMode = game.settings.get("shadowdark", "usePulpMode");
         
-    // Setup listeners for the luck token tracker
-    const luckTracker = document.querySelector(element);
-    if (luckTracker) {
-        luckTracker.addEventListener("click", (e) => {
+    if (element) {
+        element.addEventListener("click", (e) => {
             if (pulpMode) {
-                actions.changePulpLuck.call(luckTracker, e, 1);
+                actions.changePulpLuck.call(element, e, 1);
             } else {
-                actions.changeLuck.call(luckTracker, e);
+                actions.changeLuck.call(element, e);
             }
         });
 
-        luckTracker.addEventListener("contextmenu", (e) => {
+        element.addEventListener("contextmenu", (e) => {
             e.preventDefault(); // Prevent the default context menu
             if (pulpMode) {
-                actions.changePulpLuck.call(luckTracker, e, -1);
+                actions.changePulpLuck.call(element, e, -1);
             } else {
-                actions.changeLuck.call(luckTracker, e);
+                actions.changeLuck.call(element, e);
             }
         });
     }
 } 
 
 export function setupHealthPointsTracker(element) {
-    console.log("Setting up health points tracker for element:", document.querySelector(element));
-    document.querySelector(element).addEventListener("focus", function () {
+    element.addEventListener("focus", function () {
         this.value = "";
     });
 
-    document.querySelector(element).addEventListener("blur", function () {
+    element.addEventListener("blur", function () {
         this.value = this.dataset.value;
     });
 
-    document.querySelector(element).addEventListener("keyup", function (e) {
+    element.addEventListener("keyup", function (e) {
         if (e.keyCode !== 13) {
             return;
         }

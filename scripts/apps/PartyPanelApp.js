@@ -1,5 +1,5 @@
 import { openSheet, selectToken } from "../actions.js";
-import { setupLuckTracker, setupHealthPointsTracker } from "../helpers.js";
+import { setupHealthPointsTracker } from "../helpers.js";
 
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api
 
@@ -7,6 +7,10 @@ export class PartyPanelApp extends HandlebarsApplicationMixin(ApplicationV2) {
     static DEFAULT_OPTIONS = {
         id: "party",
         tag: "div",
+        position: {
+            width: "auto",
+            height: "auto",
+        },
         window: {
             frame: false,
             positioned: false,
@@ -66,9 +70,11 @@ export class PartyPanelApp extends HandlebarsApplicationMixin(ApplicationV2) {
                 el.addEventListener("dblclick", openSheet);
             });
         }
-   
-        /*
-        setupHealthPointsTracker("#current-health");
-        */
+
+        // Register HP input handlers
+        const healthInputs = this.element.querySelectorAll('.current-health');
+        for (const input of healthInputs) {
+            setupHealthPointsTracker(input);
+        }
     }
 }

@@ -7,6 +7,10 @@ export class CharacterPanelApp extends HandlebarsApplicationMixin(ApplicationV2)
     static DEFAULT_OPTIONS = {
         id: "player-character",
         tag: "div",
+        position: {
+            width: "auto",
+            height: "auto",
+        },
         window: {
             frame: false,
             positioned: false,
@@ -98,7 +102,10 @@ export class CharacterPanelApp extends HandlebarsApplicationMixin(ApplicationV2)
             });
         }
 
-        setupLuckTracker(".attr#luck-attr");
-        setupHealthPointsTracker("#current-health");
+        const luckTracker = document.querySelector(".attr#luck-attr");
+        setupLuckTracker(luckTracker);
+
+        const healthBar = document.querySelector("#current-health");
+        setupHealthPointsTracker(healthBar);
     }
 }
