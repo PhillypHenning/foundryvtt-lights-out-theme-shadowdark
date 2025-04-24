@@ -131,13 +131,7 @@ Hooks.on('updateUser', async function () {
   await renderParty();
 });
 
-function activatePartyListeners() {
-  $(document).on("dblclick", "#party .character-picture", actions.openSheet);
-  $(document).on("click", "#party .character-picture", actions.selectToken);
-  setupHealthPointsTracker("#party .current-health");
-}
-
-async function renderCharacter(s = false) {
+async function renderCharacter(selection = false) {
   const character = getCharacter();
   if (!character) {
     game.lightsOutTheme.characterPanel.hide();
@@ -160,7 +154,7 @@ async function renderCharacter(s = false) {
   data.settings = settings;
 
   // Mark if the render was triggered by a selection
-  data.selected = s;
+  data.selected = selection;
 
   game.lightsOutTheme.characterPanel.updateData(data);
 }
@@ -169,8 +163,6 @@ async function renderParty() {
   const characters = await Promise.all(getPartyCharacters().map(characterData));
 
   game.lightsOutTheme.partyPanel.updateData(characters);
-
-  //activatePartyListeners();
 }
 
 function userPermission() {
