@@ -1,4 +1,5 @@
 {{#if partyVisibility}}
+    <div>Party is visible!</div>
     {{#each characters as |c|}}
     <div class="party-character">
         <div class="character-picture" data-id="{{c.id}}">
@@ -25,4 +26,6 @@
         </div>
     </div>
     {{/each}}
+{{else}}
+  <div>Party is HIDDEN!</div>
 {{/if}}
