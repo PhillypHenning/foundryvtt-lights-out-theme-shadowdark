@@ -6,10 +6,6 @@ const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api
 export class CharacterPanelApp extends HandlebarsApplicationMixin(ApplicationV2) {
     static DEFAULT_OPTIONS = {
         id: "player-character",
-        position: {
-            width: 640,
-            height: "auto",
-        },
         tag: "div",
         window: {
             frame: false,
@@ -18,7 +14,7 @@ export class CharacterPanelApp extends HandlebarsApplicationMixin(ApplicationV2)
     }
 
     static PARTS = {
-        foo: {
+        main: {
             template: "modules/lights-out-theme-shadowdark/templates/character.hbs"
         }
     }

@@ -909,11 +909,17 @@ section.effect-panel {
 
 #party {
   position: absolute;
-  left: 0;
-  top: 200px;
+  top: 50%;
+  left: 0.25rem;
   color: white;
   font-family: "QTFrizQuad";
   pointer-events: all;
+}
+
+#party .party-characters {
+  display: flex;
+  flex-direction: column;
+  transform: translateY(-50%);
 }
 
 #party .party-character {

@@ -8,6 +8,7 @@ import * as actions from "./actions.js";
 import { setupHealthPointsTracker } from "./helpers.js";
 import { registerSettings } from "./settings.js";
 import { CharacterPanelApp } from "./apps/CharacterPanelApp.js";
+import { PartyPanelApp } from "./apps/PartyPanelApp.js";
 
 Hooks.once("init", async () => {
     registerSettings();
@@ -30,11 +31,14 @@ Hooks.once("ready", async () => {
     game.lightsOutTheme.characterPanel = new CharacterPanelApp();
     game.lightsOutTheme.characterPanel.render(true);
 
+    game.lightsOutTheme.partyPanel = new PartyPanelApp();
+    game.lightsOutTheme.partyPanel.render(true);
+
     //initial render of ui components
     await renderCharacter();
     await renderParty();
 
-    activatePartyListeners();
+    //activatePartyListeners();
 
     console.log("Lights Out Theme | Ready");
 });
@@ -134,9 +138,6 @@ function activatePartyListeners() {
 }
 
 async function renderCharacter(s = false) {
-  const elem = document.getElementById("player-character");
-  if (!elem) return;
-
   const character = getCharacter();
   if (!character) {
     game.lightsOutTheme.characterPanel.hide();
@@ -165,20 +166,11 @@ async function renderCharacter(s = false) {
 }
 
 async function renderParty() {
-  const elem = document.getElementById("party");
-  if (!elem) return;
-
   const characters = await Promise.all(getPartyCharacters().map(characterData));
 
-  const tpl = await renderTemplate("modules/lights-out-theme-shadowdark/templates/party.hbs", {
-    characters
-  });
+  game.lightsOutTheme.partyPanel.updateData(characters);
 
-  elem.innerHTML = tpl;
-
-  elem.style.top = `${window.innerHeight / 2 - elem.clientHeight / 2}px`;
-
-  activatePartyListeners();
+  //activatePartyListeners();
 }
 
 function userPermission() {
