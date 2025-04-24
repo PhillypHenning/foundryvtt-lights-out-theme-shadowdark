@@ -19,5 +19,7 @@
     "LIGHTSOUTSD.config_visibility_option_1": "GM Only",
     "LIGHTSOUTSD.config_visibility_option_2": "Players and GM",
 	"LIGHTSOUTSD.config_icon_high_contrast_mode": "High Contrast Mode for Icons",
-	"LIGHTSOUTSD.config_icon_high_contrast_mode_help": "[EXPERIMENTAL] This setting enables a grayscale high contrast filter for all icons. It can be used to achieve more Shadowdark-style iconography while still using colored icons."
+	"LIGHTSOUTSD.config_icon_high_contrast_mode_help": "[EXPERIMENTAL] This setting enables a grayscale high contrast filter for all icons. It can be used to achieve more Shadowdark-style iconography while still using colored icons.",
+	"LIGHTSOUTSD.config_party_details_visibility": "Display Party Details",
+	"LIGHTSOUTSD.config_party_details_visibility_help": "Toggle whether to show player party details on left side of screen"
 }

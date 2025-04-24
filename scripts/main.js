@@ -240,9 +240,11 @@ async function renderParty() {
   if (!elem) return;
 
   const characters = await Promise.all(getPartyCharacters().map(characterData));
+  const partyVisibility = game.settings.get("lights-out-theme-shadowdark", "party_details_config")
 
   const tpl = await renderTemplate("modules/lights-out-theme-shadowdark/templates/party.hbs", {
-    characters
+    characters,
+    partyVisibility
   });
 
   elem.innerHTML = tpl;
