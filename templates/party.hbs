@@ -13,7 +13,7 @@
                 </div>
                 <div class="character-health">
                     <div class="bar-wrapper">
-                        {{#if playerHealthVisibility}}
+                        {{#if ../playerHealthVisibility}}
                             <div class="bar {{hp.status}}" style="width: {{hp.percent}}%"></div>
 
                             <input type="text" class="current-health" data-value="{{hp.value}}" data-id="{{id}}"
