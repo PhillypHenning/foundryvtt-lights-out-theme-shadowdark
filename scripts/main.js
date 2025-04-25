@@ -5,31 +5,48 @@ import {
   tokenData
 } from "./character.js";
 import * as actions from "./actions.js";
+import { setupHealthPointsTracker } from "./helpers.js";
 import { registerSettings } from "./settings.js";
+import { CharacterPanelApp } from "./apps/CharacterPanelApp.js";
+import { PartyPanelApp } from "./apps/PartyPanelApp.js";
 
 Hooks.once("init", async () => {
     registerSettings();
-    $("body.game").append('<div id="player-character"></div>');
     $("section#ui-left").append('<div id="party"></div>');
   
     await loadTemplates([
       "modules/lights-out-theme-shadowdark/templates/character.hbs",
       "modules/lights-out-theme-shadowdark/templates/party.hbs",
     ]);
-  
-    activatePlayerListeners();
-    activatePartyListeners();
-  });
+});
 
-Hooks.on("ready", async () => {
+Hooks.once("ready", async () => {
     // Enable high contrast mode for icons
     // This changes a CSS variable to enable/disable the filter
     let highContrastModeSetting = game.settings.get("lights-out-theme-shadowdark", "icon-high-contrast-mode");
     if (highContrastModeSetting) document.documentElement.classList.add("high-contrast");
 
+    // Create and render apps
+    game.lightsOutTheme = game.lightsOutTheme || {};
+    game.lightsOutTheme.characterPanel = new CharacterPanelApp();
+    game.lightsOutTheme.characterPanel.render(true);
+
+    game.lightsOutTheme.partyPanel = new PartyPanelApp();
+    game.lightsOutTheme.partyPanel.render(true);
+
     //initial render of ui components
     await renderCharacter();
     await renderParty();
+
+    //activatePartyListeners();
+
+    console.log("Lights Out Theme | Ready");
+});
+
+Hooks.on("renderSettings", function (app, html) {
+  $('<div class="lights-out-block"></div>').insertAfter(
+    $(html).find('section[data-tab="modules"]')
+  );
 });
 
 // Hide UI elements if current player permissions are below the global setting
@@ -114,98 +131,10 @@ Hooks.on('updateUser', async function () {
   await renderParty();
 });
 
-function activatePlayerListeners() {
-  $(document).on("click", "#player-character .sheet", actions.openSheet);
-
-  setupLuckTracker(".attr#luck-attr");
-  setupHealthPointsTracker("#current-health");
-}
-
-function activatePartyListeners() {
-  $(document).on("dblclick", "#party .character-picture", actions.openSheet);
-  $(document).on("click", "#party .character-picture", actions.selectToken);
-  setupHealthPointsTracker("#party .current-health");
-}
-
-function setupLuckTracker(element) {
-  const pulpMode = game.settings.get("shadowdark", "usePulpMode");
-
-  $(document).on("click contextmenu", element, function(e) {
-    if (pulpMode) {
-      if (e.button === 0) { // left click
-        actions.changePulpLuck.call(this, e, 1);
-      } else if (e.button === 2) { // right click
-        actions.changePulpLuck.call(this, e, -1);
-      }
-    }
-    else {
-      actions.changeLuck.call(this, e);
-    }
-  });
-}
-
-function setupHealthPointsTracker(element) {
-  $(document).on("focus", element, function () {
-    this.value = "";
-  });
-
-  $(document).on("blur", element, function () {
-    this.value = this.dataset.value;
-  });
-
-  $(document).on("keyup", element, function (e) {
-    if (e.keyCode !== 13) {
-      return;
-    }
-
-    e.preventDefault();
-    e.stopPropagation();
-
-    let actor;
-    if (this.dataset.token === "true") {
-      let scene = game.canvas.scene;
-      actor = scene.tokens.find(item => item.delta.id === this.dataset.id).actor;
-    }
-    else {
-      actor = game.actors.get(this.dataset.id);
-    }
-
-    if (!actor) {
-      return;
-    }
-
-    const currentHP = this.dataset.value;
-    const inputValue = this.value.trim();
-
-    let damageAmount;
-    let multiplier;
-
-    if (inputValue.startsWith('+')) {
-      damageAmount = parseInt(inputValue.slice(1), 10);
-      multiplier = -1;
-    } else if (inputValue.startsWith('-')) {
-      damageAmount = parseInt(inputValue.slice(1), 10);
-      multiplier = 1;
-    } else {
-      const newHP = parseInt(inputValue, 10);
-      damageAmount = currentHP - newHP;
-      multiplier = 1; 
-    }
-
-    if (!isNaN(damageAmount)) {
-      actor.applyDamage(damageAmount, multiplier);
-    }
-  });
-}
-
-async function renderCharacter(s = false) {
-  const elem = document.getElementById("player-character");
-  if (!elem) return;
-
+async function renderCharacter(selection = false) {
   const character = getCharacter();
   if (!character) {
-    elem.parentNode.removeChild(elem);
-    $("body.game").append(`<div id="player-character" style="bottom: ${uiEdges().bottom}px"></div>`);
+    game.lightsOutTheme.characterPanel.hide();
     return;
   }
 
@@ -225,33 +154,17 @@ async function renderCharacter(s = false) {
   data.settings = settings;
 
   // Mark if the render was triggered by a selection
-  data.selected = s;
+  data.selected = selection;
 
-  const tpl = await renderTemplate(
-    "modules/lights-out-theme-shadowdark/templates/character.hbs",
-    data
-  );
-
-  elem.innerHTML = tpl;
+  game.lightsOutTheme.characterPanel.updateData(data);
 }
 
 async function renderParty() {
-  const elem = document.getElementById("party");
-  if (!elem) return;
-
   const characters = await Promise.all(getPartyCharacters().map(characterData));
   const partyVisibility = game.settings.get("lights-out-theme-shadowdark", "party_details_config")
   const playerHealthVisibility = game.settings.get("lights-out-theme-shadowdark", "party_details_health_config")
 
-  const tpl = await renderTemplate("modules/lights-out-theme-shadowdark/templates/party.hbs", {
-    characters,
-    partyVisibility,
-    playerHealthVisibility
-  });
-
-  elem.innerHTML = tpl;
-
-  elem.style.top = `${window.innerHeight / 2 - elem.clientHeight / 2}px`;
+  game.lightsOutTheme.partyPanel.updateData(characters);
 }
 
 function userPermission() {
