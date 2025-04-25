@@ -20,8 +20,8 @@
     "LIGHTSOUTSD.config_visibility_option_2": "Players and GM",
 	"LIGHTSOUTSD.config_icon_high_contrast_mode": "High Contrast Mode for Icons",
 	"LIGHTSOUTSD.config_icon_high_contrast_mode_help": "[EXPERIMENTAL] This setting enables a grayscale high contrast filter for all icons. It can be used to achieve more Shadowdark-style iconography while still using colored icons.",
-	"LIGHTSOUTSD.config_party_details_visibility": "Display Party Details",
-	"LIGHTSOUTSD.config_party_details_visibility_help": "Toggle whether to show party details on left side of screen",
-	"LIGHTSOUTSD.config_party_details_health_visibility": "Display Party Details - Health",
-	"LIGHTSOUTSD.config_party_details_health_visibility_help": "Toggle whether to show player health in party details on left side of screen"
+	"LIGHTSOUTSD.config_party_panel_visibility": "Party Panel Visibility",
+	"LIGHTSOUTSD.config_party_panel_visibility_help": "Controls who can see party details on left side of screen.",
+	"LIGHTSOUTSD.config_hide_party_health": "Hide Party Health",
+	"LIGHTSOUTSD.config_hide_party_health_help": "Disable showing party members' health in the party panel."
 }

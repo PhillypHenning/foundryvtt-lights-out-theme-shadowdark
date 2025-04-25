@@ -83,23 +83,28 @@ export function registerSettings() {
         default: false
     });
 
-    game.settings.register("lights-out-theme-shadowdark", "party_details_config", {
-        name: game.i18n.localize("LIGHTSOUTSD.config_party_details_visibility"),
-        hint: game.i18n.localize("LIGHTSOUTSD.config_party_details_visibility_help"),
+    game.settings.register("lights-out-theme-shadowdark", 'party_panel_visibility', {
+        name: game.i18n.localize("LIGHTSOUTSD.config_party_panel_visibility"),
+        hint: game.i18n.localize("LIGHTSOUTSD.config_party_panel_visibility_help"),
         scope: "world",
         config: true,
         requiresReload: true,
-        type: Boolean,
-        default: true
-    });
+        type: Number,
+        choices: {
+            0: game.i18n.localize("LIGHTSOUTSD.config_visibility_option_0"),
+            1: game.i18n.localize("LIGHTSOUTSD.config_visibility_option_1"),
+            2: game.i18n.localize("LIGHTSOUTSD.config_visibility_option_2")
+        },
+        default: 2
+      });
     
-    game.settings.register("lights-out-theme-shadowdark", "party_details_health_config", {
-        name: game.i18n.localize("LIGHTSOUTSD.config_party_details_health_visibility"),
-        hint: game.i18n.localize("LIGHTSOUTSD.config_party_details_health_visibility_help"),
+    game.settings.register("lights-out-theme-shadowdark", "hide_party_health", {
+        name: game.i18n.localize("LIGHTSOUTSD.config_hide_party_health"),
+        hint: game.i18n.localize("LIGHTSOUTSD.config_hide_party_health_help"),
         scope: "world",
         config: true,
         requiresReload: true,
         type: Boolean,
-        default: true
+        default: false
     });
 }
