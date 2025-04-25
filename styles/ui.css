@@ -1041,13 +1041,13 @@ section.effect-panel {
  * Animations
  */
 
-.fade-in-up {
+.lights-out-fade-in-up {
   opacity: 0;
   transform: translate(-50%, 10px);
-  animation: fadeInUp 0.3s ease-out forwards;
+  animation: lightsOutfadeInUp 0.3s ease-out forwards;
 }
 
-@keyframes fadeInUp {
+@keyframes lightsOutfadeInUp {
   0% {
     opacity: 0;
     transform: translate(-50%, 8px);
@@ -1058,11 +1058,11 @@ section.effect-panel {
   }
 }
 
-.fade-out {
-  animation: fadeOut 0.1s ease-out forwards;
+.lights-out-fade-out {
+  animation: lightsOutfadeOut 0.15s ease-out forwards;
 }
 
-@keyframes fadeOut {
+@keyframes lightsOutfadeOut {
   0% {
     opacity: 1;
   }

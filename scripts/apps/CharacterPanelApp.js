@@ -37,8 +37,8 @@ export class CharacterPanelApp extends HandlebarsApplicationMixin(ApplicationV2)
     show() {
         const elem = document.querySelector("#player-character");
         if (elem) {
-            elem.classList.remove("fade-out");
-            elem.classList.add("fade-in-up");
+            elem.classList.remove("lights-out-fade-out");
+            elem.classList.add("lights-out-fade-in-up");
             elem.style.pointerEvents = "auto";
         }
     }
@@ -46,8 +46,8 @@ export class CharacterPanelApp extends HandlebarsApplicationMixin(ApplicationV2)
     hide() {
         const elem = document.querySelector("#player-character");
         if (elem) {
-            elem.classList.remove("fade-in-up");
-            elem.classList.add("fade-out");
+            elem.classList.remove("lights-out-fade-in-up");
+            elem.classList.add("lights-out-fade-out");
             elem.style.pointerEvents = "none";
         }
     }
